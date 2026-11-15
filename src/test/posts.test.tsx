@@ -13,6 +13,16 @@ async function selectUser(name: RegExp) {
 }
 
 describe('publicaciones por usuario', () => {
+  it('muestra las regiones de usuarios y publicaciones', async () => {
+    renderWithProviders(<App />)
+    await screen.findAllByRole('listitem')
+
+    expect(screen.getByRole('region', { name: /usuarios/i })).toBeInTheDocument()
+    expect(
+      screen.getByRole('region', { name: /publicaciones/i }),
+    ).toBeInTheDocument()
+  })
+
   it('muestra las publicaciones del usuario seleccionado', async () => {
     await selectUser(/leanne graham/i)
 

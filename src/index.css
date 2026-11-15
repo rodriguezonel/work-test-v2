@@ -34,9 +34,9 @@ body {
 }
 
 .app {
-  max-width: 640px;
+  max-width: 1040px;
   margin: 0 auto;
-  padding: 2rem 1rem 3rem;
+  padding: 2rem 1.25rem 3rem;
 }
 
 .app__header h1 {
@@ -47,6 +47,29 @@ body {
 
 .app__header p {
   margin: 0 0 1.5rem;
+}
+
+.app__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+.app__panel {
+  min-width: 0;
+}
+
+.app__panel--posts h2 {
+  margin: 0 0 1rem;
+  color: var(--text-strong);
+  font-size: 1.25rem;
+}
+
+@media (max-width: 860px) {
+  .app__layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 .user-search {
@@ -127,18 +150,6 @@ body {
   border-radius: 0.5rem;
 }
 
-.posts {
-  margin-top: 2rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border);
-}
-
-.posts h2 {
-  margin: 0 0 1rem;
-  color: var(--text-strong);
-  font-size: 1.25rem;
-}
-
 .post-list {
   display: grid;
   gap: 0.75rem;
@@ -164,10 +175,6 @@ body {
 .post__body {
   margin: 0;
   font-size: 0.9rem;
-}
-
-.state--hint {
-  margin-top: 2rem;
 }
 
 .state--error {
