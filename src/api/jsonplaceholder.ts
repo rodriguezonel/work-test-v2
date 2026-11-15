@@ -27,3 +27,10 @@ export const fetchUsers = () => request<User[]>('/users')
 
 export const fetchPosts = (userId: number) =>
   request<Post[]>(`/posts?userId=${userId}`)
+
+export const createPost = (post: NewPost) =>
+  request<Post>('/posts', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(post),
+  })

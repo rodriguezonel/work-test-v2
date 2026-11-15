@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { PostForm } from './components/PostForm'
 import { PostList } from './components/PostList'
 import { QueryState } from './components/QueryState'
 import { UserList } from './components/UserList'
@@ -66,7 +67,10 @@ function App() {
               Selecciona un usuario para ver sus publicaciones.
             </p>
           ) : (
-            <PostList userId={selectedUserId} />
+            <>
+              <PostForm key={selectedUserId} userId={selectedUserId} />
+              <PostList userId={selectedUserId} />
+            </>
           )}
         </section>
       </div>

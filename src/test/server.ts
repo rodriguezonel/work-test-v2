@@ -11,4 +11,9 @@ export const server = setupServer(
     const userId = Number(new URL(request.url).searchParams.get('userId'))
     return HttpResponse.json(postsFixture.filter((post) => post.userId === userId))
   }),
+
+  http.post(`${BASE}/posts`, async ({ request }) => {
+    const body = (await request.json()) as Record<string, unknown>
+    return HttpResponse.json({ ...body, id: 101 }, { status: 201 })
+  }),
 )
