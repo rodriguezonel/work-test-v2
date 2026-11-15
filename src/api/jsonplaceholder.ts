@@ -5,6 +5,16 @@ export type User = {
   company: { name: string }
 }
 
+export type Post = {
+  id: number | string
+  userId: number
+  title: string
+  body: string
+  local?: boolean
+}
+
+export type NewPost = Pick<Post, 'userId' | 'title' | 'body'>
+
 const BASE = 'https://jsonplaceholder.typicode.com'
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
@@ -14,3 +24,6 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 }
 
 export const fetchUsers = () => request<User[]>('/users')
+
+export const fetchPosts = (userId: number) =>
+  request<Post[]>(`/posts?userId=${userId}`)

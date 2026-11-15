@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { PostList } from './components/PostList'
 import { QueryState } from './components/QueryState'
 import { UserList } from './components/UserList'
 import { UserSearch } from './components/UserSearch'
@@ -50,6 +51,14 @@ function App() {
           }
         />
       </QueryState>
+
+      {selectedUserId === null ? (
+        <p className="state state--hint">
+          Selecciona un usuario para ver sus publicaciones.
+        </p>
+      ) : (
+        <PostList userId={selectedUserId} />
+      )}
     </main>
   )
 }

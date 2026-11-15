@@ -1,4 +1,4 @@
-import type { User } from '../api/jsonplaceholder'
+import type { Post, User } from '../api/jsonplaceholder'
 
 export const usersFixture: User[] = [
   { id: 1, name: 'Leanne Graham', email: 'Sincere@april.biz', company: { name: 'Romaguera-Crona' } },
@@ -11,4 +11,25 @@ export const usersFixture: User[] = [
   { id: 8, name: 'Nicholas Runolfsdottir V', email: 'Sherwood@rosamond.me', company: { name: 'Abernathy Group' } },
   { id: 9, name: 'Glenna Reichert', email: 'Chaim_McDermott@dana.io', company: { name: 'Yost and Sons' } },
   { id: 10, name: 'Clementina DuBuque', email: 'Rey.Padberg@karina.biz', company: { name: 'Hoeger LLC' } },
+]
+
+export const postsFixture: Post[] = [
+  {
+    id: 1,
+    userId: 1,
+    title: 'Post de Leanne sobre React',
+    body: 'Contenido del primer post de Leanne.',
+  },
+  {
+    id: 2,
+    userId: 1,
+    title: 'Segundo post de Leanne',
+    body: 'Contenido del segundo post de Leanne.',
+  },
+  {
+    id: 3,
+    userId: 2,
+    title: 'Post de Ervin sobre testing',
+    body: 'Contenido del post de Ervin.',
+  },
 ]
