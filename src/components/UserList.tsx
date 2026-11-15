@@ -4,11 +4,17 @@ type UserListProps = {
   users: User[]
   selectedUserId: number | null
   onSelect: (userId: number) => void
+  emptyMessage?: string
 }
 
-export function UserList({ users, selectedUserId, onSelect }: UserListProps) {
+export function UserList({
+  users,
+  selectedUserId,
+  onSelect,
+  emptyMessage = 'No hay usuarios disponibles.',
+}: UserListProps) {
   if (users.length === 0) {
-    return <p className="state">No hay usuarios disponibles.</p>
+    return <p className="state">{emptyMessage}</p>
   }
 
   return (

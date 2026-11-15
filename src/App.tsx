@@ -1,11 +1,21 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { QueryState } from './components/QueryState'
 import { UserList } from './components/UserList'
+import { UserSearch } from './components/UserSearch'
 import { useUsers } from './hooks/useUsers'
 
 function App() {
   const [selectedUserId, setSelectedUserId] = useState<number | null>(null)
+  const [search, setSearch] = useState('')
   const users = useUsers()
+
+  const term = search.trim().toLowerCase()
+  const visibleUsers = useMemo(() => {
+    const allUsers = users.data ?? []
+    if (!term) return allUsers
+
+    return allUsers.filter((user) => user.name.toLowerCase().includes(term))
+  }, [users.data, term])
 
   return (
     <main className="app">
@@ -13,6 +23,14 @@ function App() {
         <h1>Usuarios</h1>
         <p>Selecciona un usuario para ver sus publicaciones.</p>
       </header>
+
+      <UserSearch value={search} onChange={setSearch} />
+
+      {users.data && (
+        <p className="user-search__count" aria-live="polite">
+          {visibleUsers.length} de {users.data.length} usuarios
+        </p>
+      )}
 
       <QueryState
         isPending={users.isPending}
@@ -22,9 +40,14 @@ function App() {
         onRetry={() => void users.refetch()}
       >
         <UserList
-          users={users.data ?? []}
+          users={visibleUsers}
           selectedUserId={selectedUserId}
           onSelect={setSelectedUserId}
+          emptyMessage={
+            term
+              ? `Ningún usuario coincide con «${search.trim()}».`
+              : undefined
+          }
         />
       </QueryState>
     </main>
